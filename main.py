@@ -15,8 +15,10 @@ def write_mongodb(id_enumerated,ecoregion_code,species_id,eco_endemic):
 spark = SparkSession.builder.getOrCreate()
 
 data = spark.read.csv(
-    "hdfs://172.18.0.2/user/maria_dev/bigdata/ecoregion_species.csv", 
+    "hdfs://172.18.0.2/user/maria_dev/bigdata/ecoregion_species.csv",
     header=True
 )
 
-data.foreach(lambda x: write_mongodb(x["ID"],x["ECOREGION_CODE"],x["SPECIES_ID"],x["ECO_ENDEMIC"]), print("Transferred"))
+# (x["ID"],x["ECOREGION_CODE"],x["SPECIES_ID"],x["ECO_ENDEMIC"]) Change How You want
+
+data.foreach(lambda x: write_mongodb(x["ID"],x["ECOREGION_CODE"],x["SPECIES_ID"],x["ECO_ENDEMIC"]))
